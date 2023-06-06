@@ -26,16 +26,16 @@ import (
 
 	ctrlconfig "github.com/nephio-project/nephio/controllers/pkg/reconcilers/config"
 	reconcilerinterface "github.com/nephio-project/nephio/controllers/pkg/reconcilers/reconciler-interface"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	//metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
-	types "k8s.io/apimachinery/pkg/types"
+	//types "k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/event"
 
 	"k8s.io/client-go/tools/record"
 
 	porchv1alpha1 "github.com/GoogleContainerTools/kpt/porch/api/porch/v1alpha1"
-	porchconfig "github.com/GoogleContainerTools/kpt/porch/api/porchconfig/v1alpha1"
-	pvapi "github.com/GoogleContainerTools/kpt/porch/controllers/packagevariants/api/v1alpha1"
+	//porchconfig "github.com/GoogleContainerTools/kpt/porch/api/porchconfig/v1alpha1"
+	//pvapi "github.com/GoogleContainerTools/kpt/porch/controllers/packagevariants/api/v1alpha1"
 	"github.com/go-logr/logr"
 	porchclient "github.com/nephio-project/nephio/controllers/pkg/porch/client"
 	porchconds "github.com/nephio-project/nephio/controllers/pkg/porch/condition"
@@ -109,6 +109,8 @@ func (r *reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 	if porchv1alpha1.LifecycleIsPublished(pr.Spec.Lifecycle) {
 		return ctrl.Result{}, nil
 	}
+	var err error
+	/*
 
 	// Delay if needed
 	// This is a workaround for some "settling" that seems to be needed
@@ -129,6 +131,7 @@ func (r *reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 			"NotApproved", "delay time not met")
 		return ctrl.Result{RequeueAfter: requeue}, nil
 	}
+*/
 
 	// Check for the approval policy annotation
 	policy, ok := pr.GetAnnotations()[PolicyAnnotationName]
@@ -137,6 +140,7 @@ func (r *reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 		return ctrl.Result{}, nil
 	}
 
+	/*
 	// If the package revision is owned by a PackageVariant, check the Ready condition
 	// of the package variant. If it is not Ready, then we should not approve yet. The
 	// lack of readiness could indicate an error which even impacts whether or not the
@@ -175,7 +179,7 @@ func (r *reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 		}
 
 	}
-
+*/
 	// All policies require readiness gates to be met, so if they
 	// are not, we are done for now.
 	if !porchconds.PackageRevisionIsReady(pr.Spec.ReadinessGates, pr.Status.Conditions) {

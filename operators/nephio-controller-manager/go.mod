@@ -2,7 +2,7 @@ module github.com/nephio-project/nephio/operators/nephio-controller-manager
 
 go 1.20
 
-//replace github.com/nephio-project/nephio/controllers/pkg => ../../controllers/pkg
+replace github.com/nephio-project/nephio/controllers/pkg => ../../controllers/pkg
 
 require (
 	github.com/nephio-project/nephio/controllers/pkg v0.0.0-20230602055209-50adad6b97a6
