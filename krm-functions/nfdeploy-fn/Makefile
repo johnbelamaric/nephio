@@ -10,7 +10,7 @@ include ../../default-all.mk
 all: modsync fmt test upf-docker-build smf-docker-build amf-docker-build upf-docker-push smf-docker-push amf-docker-push
 
 .PHONY: modsync
-modsync: 
+modsync:
 	go mod tidy
 	go mod vendor
 

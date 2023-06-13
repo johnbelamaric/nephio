@@ -47,7 +47,7 @@ all: docker-build docker-push
 
 .PHONY: test fmt vet
 # delegate these targets to the Makefiles of individual go modules
-test fmt vet: 
+test fmt vet:
 	for dir in $(GO_MOD_DIRS); do \
 		$(MAKE) -C "$$dir" $@ ; \
 	done

@@ -9,14 +9,15 @@ include ../../default-all.mk
 all: modsync fmt test docker-build docker-push
 
 .PHONY: modsync
-modsync: 
+modsync:
 	go mod tidy
 	go mod vendor
 
 .PHONY: docker-build
 build-image:
+	go mod vendor
 	docker buildx build --load --tag $(IMG) -f Dockerfile .
 
 .PHONY: docker-push
 push-image:
-    docker buildx build --push --tag $(IMG) -f Dockerfile .
+	docker buildx build --push --tag $(IMG) -f Dockerfile .
